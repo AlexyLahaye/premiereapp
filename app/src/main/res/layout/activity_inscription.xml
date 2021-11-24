@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:background="@drawable/fond3">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Inscription"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="23dp"
+        android:layout_marginTop="60sp"
+        android:layout_marginBottom="55sp"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNameInsc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Login"
+            android:inputType="textPersonName"
+            android:layout_marginBottom="20sp"
+            android:layout_marginHorizontal="25sp"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textPersonName"
+            android:layout_marginBottom="20sp"
+            android:layout_marginHorizontal="25sp"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nom"
+            android:inputType="textPersonName"
+            android:layout_marginBottom="20sp"
+            android:layout_marginHorizontal="25sp"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPrenom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Prénom"
+            android:inputType="textPersonName"
+            android:layout_marginBottom="20sp"
+            android:layout_marginHorizontal="25sp"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPwd1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mot de passe"
+            android:inputType="textPassword"
+            android:layout_marginBottom="20sp"
+            android:layout_marginHorizontal="25sp"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPwd2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirmation du mot de passe"
+            android:inputType="textPassword"
+            android:layout_marginBottom="50sp"
+            android:layout_marginHorizontal="25sp"/>
+
+
+    <Button
+        android:id="@+id/btSendInsc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25sp"
+        android:text="Valider"/>
+
+    <Button
+        android:id="@+id/btGoCnx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25sp"
+        android:text="J'ai deja un compte/Je me connecte"
+        />
+
+
+</LinearLayout>

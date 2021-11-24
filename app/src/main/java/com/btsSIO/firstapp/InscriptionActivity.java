@@ -25,22 +25,30 @@ import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class InscriptionActivity extends AppCompatActivity {
     private EditText etName;
-    private EditText etPwd;
+    private EditText etPwd1;
+    private EditText etPwd2;
+    private EditText etMail;
+    private EditText etNom;
+    private EditText etPrenom;
     private Button btSend;
-    private Button btGoInsc;
+    private Button btGoCnx;
     private StringRequest stringRequest;
     private RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_inscription);
 
-        etName = (EditText) findViewById(R.id.etName);
-        etPwd  = (EditText) findViewById(R.id.etPwd);
-        btSend = (Button) findViewById(R.id.btSend);
-        btGoInsc = (Button) findViewById(R.id.btGoInsc);
+        etName = (EditText) findViewById(R.id.etNameInsc);
+        etMail = (EditText) findViewById(R.id.etMail);
+        etNom = (EditText) findViewById(R.id.etNom);
+        etPrenom= (EditText) findViewById(R.id.etPrenom);
+        etPwd1  = (EditText) findViewById(R.id.etPwd1);
+        etPwd2 = (EditText) findViewById(R.id.etPwd2);
+        btSend = (Button) findViewById(R.id.btSendInsc);
+        btGoCnx = (Button) findViewById(R.id.btGoCnx);
 
         btSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,35 +56,33 @@ public class MainActivity extends AppCompatActivity {
                 toRecap();
             }
         });
-
-        btGoInsc.setOnClickListener(new View.OnClickListener() {
+        btGoCnx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                toInscription();
+                Intent intent2 = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent2);
             }
         });
     }
-    public void toInscription (){
-        Intent intent = new Intent(getApplicationContext(),InscriptionActivity.class);
-        startActivity(intent);
-        finish();
-    }
     public void toRecap(){
         String login = etName.getText().toString();
-        String mdp = etPwd.getText().toString();
-        if (!login.equalsIgnoreCase("") && !mdp.equalsIgnoreCase("")){
-            stringRequest = new StringRequest(Request.Method.POST, DBPages.login_url, new Response.Listener<String>() {
+        String email = etMail.getText().toString();
+        String nom = etNom.getText().toString();
+        String prenom = etPrenom.getText().toString();
+        String mdp1 = etPwd1.getText().toString();
+        String mdp2 = etPwd2.getText().toString();
+        if (mdp1.equals(mdp2) && !login.equalsIgnoreCase("") && !mdp1.equalsIgnoreCase("") && !mdp2.equalsIgnoreCase("") && !prenom.equalsIgnoreCase("") && !nom.equalsIgnoreCase("") && !email.equalsIgnoreCase("")){
+            stringRequest = new StringRequest(Request.Method.POST, DBPages.inscription_url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     Log.d("resultatAppli",response);
-                    if(StringUtils.contains(response, "Connecté")){
-                        Intent intent = new Intent(getApplicationContext(), ActivityRecap.class);
-                        intent.putExtra("login",login);
-                        intent.putExtra("response", response);
-                        startActivity(intent);
+                    if(StringUtils.contains(response, "Inscription")){
+                        Intent intent3 = new Intent(getApplicationContext(), ActivityRecap.class);
+                        intent3.putExtra("login",login);
+                        startActivity(intent3);
                         finish();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Mauvais login ou mot de passe", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "FAUX", Toast.LENGTH_SHORT).show();
                     }
                 }
             }, new Response.ErrorListener() {
@@ -89,13 +95,17 @@ public class MainActivity extends AppCompatActivity {
                 protected Map<String, String> getParams(){
                     Map<String,String> params = new HashMap<>();
                     params.put("login",login);
-                    params.put("mdp",mdp);
+                    params.put("mail",email);
+                    params.put("nom",nom);
+                    params.put("prenom",prenom);
+                    params.put("mdp1",mdp1);
+                    params.put("mdp2",mdp2);
                     return params;
                 }
             };
-            requestQueue = Volley.newRequestQueue(MainActivity.this);
+            requestQueue = Volley.newRequestQueue(InscriptionActivity.this);
             requestQueue.add(stringRequest);
-    }else{
+        }else{
             Toast.makeText(getApplicationContext(),"Les champs sont incomplets", Toast.LENGTH_SHORT);
         }
     }
